@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>CIOS — FGC Crush Rock Abuja</title>
+<meta name="description" content="CIOS admin console for The Foursquare Gospel Church, Crush Rock Abuja." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: #fff; color: #1f2937; overflow: hidden;
+  }
+  iframe {
+    position: fixed; inset: 0; width: 100%; height: 100dvh;
+    border: 0; background: #fff; display: block;
+  }
+  #splash {
+    position: fixed; inset: 0; z-index: 2; background: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    transition: opacity .6s ease; pointer-events: none;
+  }
+  body.ready #splash { opacity: 0; }
+  #splash .mark { width: 52px; height: 52px; animation: breathe 2.4s ease-in-out infinite; }
+  #splash .mark img { width: 100%; height: 100%; display: block; }
+  #splash .word { font-size: 13px; font-weight: 500; letter-spacing: .45em; text-indent: .45em; color: #9ca3af; }
+  @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+  #fallback {
+    position: fixed; inset: 0; z-index: 1; display: none;
+    align-items: center; justify-content: center; text-align: center; padding: 24px;
+  }
+  body.failed #fallback { display: flex; }
+  body.failed #splash { display: none; }
+  #fallback p { font-size: 15px; color: #6b7280; line-height: 1.6; margin: 0; }
+  #fallback a { color: #1b2a4a; font-weight: 500; text-decoration: none; border-bottom: 1px solid #d1d5db; }
+  @media (prefers-reduced-motion: reduce) {
+    #splash .mark { animation: none; }
+    #splash { transition: none; }
+  }
+</style>
+</head>
+<body>
+<iframe id="frame" title="CIOS admin console" src="https://script.google.com/macros/s/AKfycbzCd1B0zI0u4KwNqgEXyu1RZQ8qE2eTc5qmV2k9ibHd-GITK3E4E8RpU5d93EQMMnq5/exec" allow="clipboard-write"></iframe>
+
+<div id="splash" aria-hidden="true">
+  <!-- Canonical logo: the standalone Foursquare mark, fetched from
+       foursquare-mark.png on this same Pages site (the same asset
+       as https://fgccra.github.io/cios-console/foursquare-mark.png). -->
+  <span class="mark"><img src="foursquare-mark.png" width="52" height="52" alt="Foursquare mark" /></span>
+  <span class="word">CIOS</span>
+</div>
+
+<div id="fallback"><p>The console didn&rsquo;t load.<br /><a href="https://script.google.com/macros/s/AKfycbzCd1B0zI0u4KwNqgEXyu1RZQ8qE2eTc5qmV2k9ibHd-GITK3E4E8RpU5d93EQMMnq5/exec">Try opening it directly</a></p></div>
+
+<script>
+  (function () {
+    var loaded = false;
+    var frame = document.getElementById('frame');
+    frame.addEventListener('load', function () {
+      loaded = true;
+      document.body.classList.add('ready');
+    });
+    // Only if the frame never loads (blocked network, etc.) show a quiet fallback.
+    setTimeout(function () { if (!loaded) document.body.classList.add('failed'); }, 10000);
+  })();
+</script>
+</body>
+</html>
